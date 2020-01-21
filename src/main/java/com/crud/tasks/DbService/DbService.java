@@ -18,14 +18,15 @@ public class DbService {
         return repository.findAll();
     }
 
-    public Task getTaskById(final Long id) {
-        Optional<Task> task = repository.findAll().stream().filter(i -> i.getId().equals(id)).findFirst();
-        if (task.isPresent()) {
-            return task.get();
-        } return null;
+    public Optional<Task> getTask(final Long id) {
+        return repository.findById(id);
     }
 
     public Task saveTask(final Task task) {
         return repository.save(task);
+    }
+
+    public void deleteTask(Optional<Task> task) {
+        repository.delete(task.get());
     }
 }
